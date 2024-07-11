@@ -8,6 +8,16 @@ RSpec.describe Heap do
       [5, 3, 7, 1, 6, 9].each { |num| heap.push(num) }
       expect(heap.peek).to eq(1)
     end
+
+    it 'adds duplicate elements to the heap' do
+      [5, 3, 3, 1, 1, 1].each { |num| heap.push(num) }
+      expect(heap.peek).to eq(1)
+    end
+
+    it 'adds negative elements to the heap' do
+      [5, 3, -7, 1, -6, 9].each { |num| heap.push(num) }
+      expect(heap.peek).to eq(-7)
+    end
   end
 
   describe '#pop' do
@@ -15,6 +25,10 @@ RSpec.describe Heap do
       [5, 3, 7, 1, 6, 9].each { |num| heap.push(num) }
       expect(heap.pop).to eq(1)
       expect(heap.peek).to eq(3)
+    end
+
+    it 'returns nil when trying to pop from an empty heap' do
+      expect(heap.pop).to be_nil
     end
   end
 
@@ -24,6 +38,10 @@ RSpec.describe Heap do
       expect(heap.peek).to eq(1)
       heap.push(0)
       expect(heap.peek).to eq(0)
+    end
+
+    it 'returns nil when trying to peek at an empty heap' do
+      expect(heap.peek).to be_nil
     end
   end
 
