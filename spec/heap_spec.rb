@@ -43,7 +43,7 @@ class Heap
 
     min = root.value
     last_node = find_last_node
-    last_node.parent.children.unshift # because #push makes the first value in the end of array
+    last_node.parent.children.pop
     root.value = last_node.value
 
     node = root
@@ -69,20 +69,22 @@ class Heap
   def find_last_node
     return root if root.children.empty?
 
-    node = root.children[0]
-    node = node.children[0] until node.children.empty?
+    right = 1
+    node = root.children[right]
+    node = node.children[right] until node.children[right].nil?
     node
   end
 
   def find_insertable_node
     return root if root.children.count < 2
 
-    queue = [*root.children.reverse]
+    # bfs
+    queue = [*root.children]
     until queue.empty?
       node = queue.shift
       return node if node.children.count < 2
 
-      queue.concat(node.children.reverse)
+      queue.concat(node.children)
     end
   end
 end
