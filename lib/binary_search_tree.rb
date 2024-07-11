@@ -55,6 +55,8 @@ class BinarySearchTree
 
   def delete(value)
     node = find_node_by_value(value)
+    return if node.nil?
+
     parent_node = node.parent
 
     if node.right.nil? && node.left.nil? && node == root
@@ -68,9 +70,12 @@ class BinarySearchTree
       return
     end
 
-    if !node.right.nil? || !node.left.nil?
+    if node.right.nil? ^ node.left.nil?
       no_parent_node = node.right || node.left
       no_parent_node.parent = parent_node
+
+      return if node == root
+
       if parent_node.right == node
         parent_node.right = no_parent_node
       else
@@ -85,7 +90,11 @@ class BinarySearchTree
     biggest_node = biggest_node.right until biggest_node.right.nil?
 
     node.value = biggest_node.value
-    biggest_node.parent.right = nil
+    if biggest_node.parent.right == biggest_node
+      biggest_node.parent.right = nil
+    else
+      biggest_node.parent.left = nil
+    end
   end
 
   def inorder
