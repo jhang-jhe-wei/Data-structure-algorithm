@@ -58,7 +58,7 @@ class Heap
   end
 
   def peek
-    root.value
+    root&.value
   end
 
   def empty?
