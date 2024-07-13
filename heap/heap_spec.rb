@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require_relative 'heap'
 
 RSpec.describe Heap do
   let(:heap) { Heap.new }
