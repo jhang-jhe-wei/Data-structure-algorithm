@@ -1,27 +1,25 @@
 # frozen_string_literal: true
 
-module MergeSort
-  class << self
-    def sort(ary)
-      return ary if ary.size <= 1
+def merge_sort(array)
+  return array if array.size <= 1
 
-      left, right = slice(ary).map { |a| sort(a) }
-      merge(left, right)
-    end
+  left, right = slice(array).map { |ary| merge_sort(ary) }
+  merge(left, right)
+end
 
-    private
+private
 
-    def slice(ary)
-      return [ary] if ary.size <= 1
+def slice(array)
+  return [array] if array.size <= 1
 
-      half = ary.size / 2
-      [ary[0...half], ary[half..]]
-    end
+  m = array.size / 2
+  [array[0...m], array[m..]]
+end
 
-    def merge(left, right)
-      result = []
-      result << (left.first <= right.first ? left.shift : right.shift) until left.empty? || right.empty?
-      result + left + right
-    end
-  end
+def merge(left, right)
+  array = []
+
+  array.push(left.first < right.first ? left.shift : right.shift) until left.empty? || right.empty?
+
+  array + left + right
 end
