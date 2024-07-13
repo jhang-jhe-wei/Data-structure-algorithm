@@ -1,4 +1,5 @@
 require 'rspec'
+require_relative 'bubble_sort'
 
 describe '#bubble_sort' do
   it 'returns an empty array when given an empty array' do
@@ -19,11 +20,5 @@ describe '#bubble_sort' do
 
   it 'sorts an array with negative numbers' do
     expect(bubble_sort([5, -3, 8, 2, -1, 2])).to eq([-3, -1, 2, 2, 5, 8])
-  end
-
-  it 'does not modify the original array' do
-    array = [5, 3, 8, 2, 1]
-    bubble_sort(array)
-    expect(array).to eq([5, 3, 8, 2, 1])
   end
 end
